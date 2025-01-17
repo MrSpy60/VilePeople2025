@@ -9,6 +9,6 @@ namespace PeopleVilleEngine.Events.EventManagers
     public interface IEventManager
     {
         string Name { get; }
-        void TriggerEventManager(Village village);
+        void TriggerEventManager(Village village, List<IEvent> preEvents, List<IEvent> postEvents);
     }
 }

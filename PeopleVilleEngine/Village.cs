@@ -4,23 +4,20 @@ using PeopleVilleEngine.Locations;
 using System.Reflection;
 using System.Linq;
 using PeopleVilleEngine.Events;
+using PeopleVilleEngine.Time;
 
 public class Village
 {
     private readonly RNG _random = RNG.GetInstance();
+    private TimeKeeper _timeKeeper;
     public List<BaseVillager> Villagers { get; } = new();
     public List<ILocation> Locations { get; } = new();
     public VillagerNames VillagerNameLibrary { get; } = VillagerNames.GetInstance();
-    public eventDeath hello = new eventDeath();
     public Village()
     {
+        _timeKeeper = TimeKeeper.GetInstance(this);
         Console.WriteLine("Creating villager");
         CreateVillage();
-        
-        while(Villagers.Count > 1)
-        {
-            hello.triggerEvent(this);
-        }
     }
 
 
