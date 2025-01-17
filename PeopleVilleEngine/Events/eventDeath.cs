@@ -25,7 +25,5 @@ namespace PeopleVilleEngine.Events
             }
             village.Villagers.Remove(deadManWalking);
         }
-
-        
     }
 }

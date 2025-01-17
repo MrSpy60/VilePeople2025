@@ -8,11 +8,16 @@ namespace PeopleVilleEngine.Events.EventManagers
 {
     internal class EManagerCasus : IEventManager
     {
+        private readonly RNG _rng = RNG.GetInstance();
         public string Name => "Casus";
 
-        public void TriggerEventManager(Village village)
+
+        public void TriggerEventManager(Village village, List<IEvent> preEvents, List<IEvent> postEvents)
         {
-            throw new NotImplementedException();
+            if (_rng.Next(100) > 80)
+            {
+                preEvents.Add(new eventDeath());
+            };
         }
     }
 }
