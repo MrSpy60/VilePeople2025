@@ -3,7 +3,7 @@ public interface ILocation
 {
     string Name { get; }
 
-    int WorkCost { get; }
+    int BuildCost { get; }
 
     List<BaseVillager> Villagers();
 }
@@ -16,6 +16,8 @@ public interface IHouse : ILocation
 
 public interface IWorkplace : ILocation
 {
+    public int WorkCost { get; }
+
     public int Workers { get; }
     public int MaxWorkers { get; }
 

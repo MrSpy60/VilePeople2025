@@ -8,7 +8,7 @@ public class FoodStation : IWorkplace
     }
     private readonly List<BaseVillager> _villagers = new();
     public string Name => $"Food Station, with {Workers} workers.";
-    public int WorkCost => 50;
+    public int BuildCost => 50;
 
     public List<BaseVillager> Villagers()
     {
