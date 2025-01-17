@@ -8,7 +8,7 @@ public class SimpleHouse : IHouse
     }
     private readonly List<BaseVillager> _villagers = new();
     public string Name => $"Simple House, with a population of {Population}.";
-    public int WorkBuCost => 50;
+    public int BuildCost => 50;
 
     public List<BaseVillager> Villagers()
     {

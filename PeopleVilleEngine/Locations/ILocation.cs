@@ -1,4 +1,7 @@
-﻿namespace PeopleVilleEngine.Locations;
+﻿using PeopleVilleEngine.Events;
+using System.Net.NetworkInformation;
+
+namespace PeopleVilleEngine.Locations;
 public interface ILocation
 {
     string Name { get; }
@@ -6,6 +9,11 @@ public interface ILocation
     int BuildCost { get; }
 
     List<BaseVillager> Villagers();
+
+    // IStatus Status { get; }
+
+
+
 }
 
 public interface IHouse : ILocation
@@ -16,9 +24,9 @@ public interface IHouse : ILocation
 
 public interface IWorkplace : ILocation
 {
-    public int WorkCost { get; }
-
     public int Workers { get; }
     public int MaxWorkers { get; }
+    public int WorkCost { get; }
+    public IEvent WorkEvent_Complete { get; }
 
 }

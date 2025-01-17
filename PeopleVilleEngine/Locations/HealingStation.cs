@@ -1,18 +1,18 @@
 ﻿using PeopleVilleEngine.Events;
 
 namespace PeopleVilleEngine.Locations;
-public class FoodStation : IWorkplace
+public class HealingStation : IWorkplace
 {
-    public FoodStation()
+    public HealingStation()
     {
         var random = RNG.GetInstance();
         MaxWorkers = random.Next(1, 3);
     }
     private readonly List<BaseVillager> _villagers = new();
-    public string Name => $"Food Station, with {Workers} workers.";
+    public string Name => $"Healing Station, with {Workers} workers.";
     public int BuildCost => 50;
     public int WorkCost => 50;
-    public IEvent WorkEvent_Complete => new eventDeath(); // Add hunger restoration event here
+    public IEvent WorkEvent_Complete => new eventDeath(); // Add health restoration event here.
 
     public List<BaseVillager> Villagers()
     {
