@@ -14,9 +14,11 @@ namespace PeopleVilleEngine.Events.EventManagers
 
         public void TriggerEventManager(Village village, List<IEvent> preEvents, List<IEvent> postEvents)
         {
-            if (_rng.Next(100) > 80)
+            int rng = _rng.Next(100);
+            if (rng > 80)
             {
-                preEvents.Add(new eventDeath());
+                if (rng >= 90) preEvents.Add(new eventMigration());
+                else preEvents.Add(new eventDeath());
             };
         }
     }
