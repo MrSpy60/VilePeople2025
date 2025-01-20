@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PeopleVilleEngine.Status;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace PeopleVilleEngine.Status
     public interface IStatus
     {
         public string Name { get; }
-        public void effecttrigger(Village village); 
+        public void effecttrigger(Village village);
 
     }
 
@@ -17,6 +18,11 @@ namespace PeopleVilleEngine.Status
     {
         BaseVillager Owner { get; set; }
         double ValueBuff { get; }
+    }
+    public interface INegative : IStatus
+    {
+        BaseVillager Owner { get; set; }
+        double ValueDebuff { get; }
     }
 
     public class Tool25 : ITool
@@ -55,7 +61,40 @@ namespace PeopleVilleEngine.Status
         {
             throw new NotImplementedException();
         }
-
+        
     }
+    public class Exhaustion : INegative
+    {
+        public string Name => "Exhaustion";
+        public required BaseVillager Owner { get; set; }
+        public double ValueDebuff => -35.0;
 
-}   
+        public void effecttrigger(Village village)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class Common_Cold : INegative
+    {
+        public string Name => "Common Cold";
+        public required BaseVillager Owner { get; set; }
+        public double ValueDebuff => -25.0;
+
+        public void effecttrigger(Village village)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class Extreme_Sadness : INegative
+    {
+        public string Name => "The Big Sad";
+        public required BaseVillager Owner { get; set; }
+        public double ValueDebuff => -45.0;
+
+        public void effecttrigger(Village village)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
+
