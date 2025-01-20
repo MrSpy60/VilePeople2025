@@ -78,14 +78,14 @@ public class Village
 
     private void TestBuildingHealingStation()
     {
-        // Create a HealingStation instance
+        // HealingStation instance
         HealingStation healingStation = new HealingStation();
         Console.WriteLine($"Created: {healingStation.Name}");
 
-        // Create a Project for the HealingStation
+        // HealingStation
         Project project = new Project(healingStation);
 
-        // Simulate working on the project
+        // Simulate working on project
         double workAmount = 21; // Amount of work to simulate
         while (project.CurrentProgress < healingStation.BuildCost)
         {
