@@ -81,4 +81,9 @@ public class Village
     {
         return $"Village have {Villagers.Count} villagers, where {Villagers.Count(v => v.HasHome() == false)} are homeless.";
     }
+
+    public void NextDay()
+    {
+        _timeKeeper.PassTime();
+    }
 }
