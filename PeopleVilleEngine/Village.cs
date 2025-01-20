@@ -11,16 +11,18 @@ public class Village
     public List<BaseVillager> Villagers { get; } = new();
     public List<ILocation> Locations { get; } = new();
     public VillagerNames VillagerNameLibrary { get; } = VillagerNames.GetInstance();
-    public eventDeath hello = new eventDeath();
     public Village()
     {
         Console.WriteLine("Creating villager");
         CreateVillage();
-        
-        while(Villagers.Count > 1)
-        {
-            hello.triggerEvent(this);
-        }
+    }
+
+
+    // get villagers efficiency 
+    // create a formula that calculates the building cost/speed    ->    // template: BuildCost = VillagerAdultCount * VillagerWorkEfficiency
+    public class Project
+    {
+
     }
 
 
