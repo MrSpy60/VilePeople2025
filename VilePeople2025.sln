@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeopleVilleEngine", "People
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PeopleVilleVillagerHomeless", "PeopleVilleVillagerHomeless\PeopleVilleVillagerHomeless.csproj", "{9FDFCE2C-71D0-469C-A774-BC847846BCCE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualVillage", "VisualVillage\VisualVillage.csproj", "{6053B021-8B08-4ED0-8E67-1269EAC25704}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{9FDFCE2C-71D0-469C-A774-BC847846BCCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FDFCE2C-71D0-469C-A774-BC847846BCCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FDFCE2C-71D0-469C-A774-BC847846BCCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6053B021-8B08-4ED0-8E67-1269EAC25704}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6053B021-8B08-4ED0-8E67-1269EAC25704}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6053B021-8B08-4ED0-8E67-1269EAC25704}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6053B021-8B08-4ED0-8E67-1269EAC25704}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
