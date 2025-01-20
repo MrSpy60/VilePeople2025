@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Linq;
 using PeopleVilleEngine.Events;
 using PeopleVilleEngine.Time;
+using PeopleVilleEngine.Status;
 
 public class Village
 {
@@ -19,6 +20,7 @@ public class Village
         _timeKeeper = TimeKeeper.GetInstance(this);
         Console.WriteLine("Creating villager");
         CreateVillage();
+        //new StatusSortePer(this);
     }
 
 
@@ -37,7 +39,6 @@ public class Village
             villageCreators = LoadVillagerCreatorFactories();
         }
         Console.ResetColor();
-        Console.WriteLine();
 
         int villageCreatorindex = 0;
 

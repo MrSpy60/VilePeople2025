@@ -34,8 +34,8 @@ namespace PeopleVilleEngine.Events
                 
                 if (freeSpots >= migrants)
                 {
-                    village.CreateVillagers(migrants);
                     Console.WriteLine($", {migrants} joined the village");
+                    village.CreateVillagers(migrants);
                     return;
                 }
             }

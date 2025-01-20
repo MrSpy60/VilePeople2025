@@ -1,5 +1,6 @@
 ﻿using PeopleVilleEngine;
 using PeopleVilleEngine.Locations;
+using PeopleVilleEngine.Status;
 using PeopleVilleEngine.Villagers.VillagerStats;
 
 public abstract class BaseVillager
@@ -11,6 +12,7 @@ public abstract class BaseVillager
     private Village _village;
     public ILocation? Home { get; set; } = null;
     public bool HasHome() => Home != null;
+    public List<IStatus> statuses { get; set; }
     public VillagerStats Stats { get; set; }
 
     protected BaseVillager(Village village)
@@ -19,6 +21,7 @@ public abstract class BaseVillager
         IsMale = RNG.GetInstance().Next(0, 2) == 0;
         (FirstName, LastName) = village.VillagerNameLibrary.GetRandomNames(IsMale);
         Stats = new VillagerStats(RNG.GetInstance());
+        statuses = [];
     }
 
     public override string ToString()

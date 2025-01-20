@@ -43,12 +43,12 @@ namespace PeopleVilleEngine.Time
 
         public string DateToString()
         {
-            return _date.ToString();
+            return $"Day {_date} of Year {_year}";
         }
 
         public void PassTime()
         {
-            Console.WriteLine($"Starting Day {_date} Year {_year}");
+            Console.WriteLine($"Starting {DateToString()}");
             //Call event manager
             eventManager.TriggerEventManager(_village, preEvent, postEvent);
             //Pre-events
@@ -66,7 +66,14 @@ namespace PeopleVilleEngine.Time
                 //status Villagers
             foreach (BaseVillager villager in _village.Villagers)
             {
-                // #TODO: loop villager.trigger()
+                if (villager == null)
+                {
+                    continue;
+                }
+                if (villager.statuses.Count() != 0)
+                {
+                    villager.statuses.ForEach(status => { status.effecttrigger(_village); });
+                }
             }
             // WORK WORK
 
@@ -77,6 +84,7 @@ namespace PeopleVilleEngine.Time
             }
 
             //clean up
+
             preEvent = [];
             postEvent = [];
 
