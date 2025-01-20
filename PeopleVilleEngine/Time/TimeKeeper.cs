@@ -21,7 +21,10 @@ namespace PeopleVilleEngine.Time
         private int _date = 1;
         private int _daysInAYear = 112;
         private int _year = 0;
-        private Project _project;
+
+        private Queue<Project> _projectQueue  = new Queue<Project>();
+        private Project _currentProject;
+
 
         private TimeKeeper(Village village)
         {
@@ -29,7 +32,12 @@ namespace PeopleVilleEngine.Time
             eventManager = new EManagerCasus(); // #TODO: add random event managers from dll's and pick one (possible users choice)
             _village = village;
 
-            _project = new Project();
+            // initialise Projects
+            _projectQueue.Enqueue(new Project(new FoodStation()));
+            _projectQueue.Enqueue(new Project(new HealingStation()));
+            
+            // sets the first project
+            _currentProject = _projectQueue.Dequeue();
         }
 
         public static TimeKeeper GetInstance(Village village)
@@ -45,6 +53,12 @@ namespace PeopleVilleEngine.Time
         {
             return _date;
         }
+
+        public Project GetCurrentProject()
+        {
+            return _currentProject;
+        }
+
 
         public string DateToString()
         {
@@ -81,10 +95,24 @@ namespace PeopleVilleEngine.Time
                 }
             }
 
-            // PROJECT
-            int aliveVillagers = _village.Villagers.Count(v => v != null); // Count alive villagers
-            double additionalWork = aliveVillagers * 1.0; // villager contributes 1 unit of work pr. day
-            _project.Work(additionalWork); // Add work to the project
+            // PROJECT: Work on the current project
+            int aliveVillagers = _village.Villagers.Count(v => v != null); // count alive villagers
+            double additionalWork = aliveVillagers * 1.0; // each villager contributes 1 unit of work per day
+
+            // add work to the current project
+            _currentProject.Work(additionalWork);
+
+            // check if the current project is complete
+            if (_currentProject.IsComplete())
+            {
+                // if project is complete, remove + get the next from queue
+                if (_projectQueue.Count > 0)
+                {
+                    _currentProject = _projectQueue.Dequeue(); // get the next project
+                }
+
+            }
+
 
             // Post-Events
             foreach (IEvent e in postEvent)

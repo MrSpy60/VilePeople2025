@@ -13,7 +13,7 @@ namespace PeopleVilleEngine.Locations.Project
         public ILocation ProjectType { get; }
         public double CurrentProgress { get; private set; }
 
-        private List<IProjects> Projects { get; } = new();
+        private List<IProjects> Projects { get; } = new(); // stores different projects
 
         public Project(ILocation projectType)
         {
@@ -21,6 +21,7 @@ namespace PeopleVilleEngine.Locations.Project
             CurrentProgress = 0;
         }
 
+        // add work to the project
         public void Work(double work)
         {
             CurrentProgress += work;
@@ -31,6 +32,7 @@ namespace PeopleVilleEngine.Locations.Project
             }
         }
 
+        // remove completed project
         public void RemoveCompletedProject()
         {
             var completedProject = Projects.FirstOrDefault(p => p.IsComplete);
@@ -39,14 +41,19 @@ namespace PeopleVilleEngine.Locations.Project
                 Projects.Remove(completedProject);
             }
         }
-    }
 
+        public bool IsComplete()
+        {
+            return CurrentProgress >= ProjectType.BuildCost;
+        }
+    }
 
     public class SampleProject : IProjects
     {
         public double BuildCost { get; set; }
         public double CurrentProgress { get; set; }
 
+        // Property to check if the project is complete
         public bool IsComplete => CurrentProgress >= BuildCost;
 
         public SampleProject(double buildCost)
@@ -55,6 +62,7 @@ namespace PeopleVilleEngine.Locations.Project
             CurrentProgress = 0;
         }
 
+        // add progress to the project
         public void AddProgress(double progress)
         {
             CurrentProgress += progress;

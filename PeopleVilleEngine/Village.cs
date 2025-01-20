@@ -94,10 +94,24 @@ public class Village
     public void NextDay()
     {
         _timeKeeper.PassTime();
+        LogProjectUpdate();
     }
 
     public int GetDay()
     {
         return _timeKeeper.getDate();
+    }
+
+    private void LogProjectUpdate()
+    {
+        var currentProject = _timeKeeper.GetCurrentProject();
+        if (currentProject != null)
+        {
+            Console.WriteLine($"Day {GetDay()}: Working on {currentProject.ProjectType.Name}");
+            if (currentProject.IsComplete())
+            {
+                Console.WriteLine($"Project {currentProject.ProjectType.Name} is complete.");
+            }
+        }
     }
 }
