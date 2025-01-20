@@ -10,7 +10,7 @@ public class HealingStation : IWorkplace
     }
     private readonly List<BaseVillager> _villagers = new();
     public string Name => $"Healing Station, with {Workers} workers.";
-    public int BuildCost => 500;
+    public int BuildCost => 50;
     public int WorkCost => 50;
     public IEvent WorkEvent_Complete => new eventDeath(); // Add health restoration event here.
 
