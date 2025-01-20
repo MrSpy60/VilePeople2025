@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using PeopleVilleEngine.Events;
 using PeopleVilleEngine.Events.EventManagers;
 using PeopleVilleEngine.Locations;
+using PeopleVilleEngine.Locations.Project;
 
 namespace PeopleVilleEngine.Time
 {
@@ -20,11 +21,15 @@ namespace PeopleVilleEngine.Time
         private int _date = 1;
         private int _daysInAYear = 112;
         private int _year = 0;
+        private Project _project;
+
         private TimeKeeper(Village village)
         {
             Console.WriteLine("Creating Time Keeper");
-            eventManager = new EManagerCasus(); // #TODO: add random eventmanagers from dll's and pick one (possible users choice)
+            eventManager = new EManagerCasus(); // #TODO: add random event managers from dll's and pick one (possible users choice)
             _village = village;
+
+            _project = new Project();
         }
 
         public static TimeKeeper GetInstance(Village village)
@@ -49,21 +54,21 @@ namespace PeopleVilleEngine.Time
         public void PassTime()
         {
             Console.WriteLine($"Starting {DateToString()}");
-            //Call event manager
+            // Call event manager
             eventManager.TriggerEventManager(_village, preEvent, postEvent);
-            //Pre-events
+            // Pre-events
             foreach (IEvent e in preEvent)
             {
                 e.triggerEvent(_village);
             }
 
-            //Statuses
-                //Status Locations
-            foreach(ILocation location in _village.Locations)
+            // Statuses
+            // Status Locations
+            foreach (ILocation location in _village.Locations)
             {
                 // #TODO: loop status.trigger()
             }
-                //status Villagers
+            // Status Villagers
             foreach (BaseVillager villager in _village.Villagers)
             {
                 if (villager == null)
@@ -75,18 +80,21 @@ namespace PeopleVilleEngine.Time
                     villager.statuses.ForEach(status => { status.effecttrigger(_village); });
                 }
             }
-            // WORK WORK
 
-            //Post-Events
+            // PROJECT
+            int aliveVillagers = _village.Villagers.Count(v => v != null); // Count alive villagers
+            double additionalWork = aliveVillagers * 1.0; // villager contributes 1 unit of work pr. day
+            _project.Work(additionalWork); // Add work to the project
+
+            // Post-Events
             foreach (IEvent e in postEvent)
             {
                 e.triggerEvent(_village);
             }
 
-            //clean up
-
-            preEvent = [];
-            postEvent = [];
+            // Clean up
+            preEvent.Clear();
+            postEvent.Clear();
 
             _date++;
             if (_date > _daysInAYear)
