@@ -1,5 +1,6 @@
 ﻿using PeopleVilleEngine;
 using PeopleVilleEngine.Locations;
+using PeopleVilleEngine.Villagers.VillagerStats;
 
 public abstract class BaseVillager
 {
@@ -10,16 +11,18 @@ public abstract class BaseVillager
     private Village _village;
     public ILocation? Home { get; set; } = null;
     public bool HasHome() => Home != null;
+    public VillagerStats Stats { get; set; }
 
     protected BaseVillager(Village village)
     {
         _village = village;
         IsMale = RNG.GetInstance().Next(0, 2) == 0;
         (FirstName, LastName) = village.VillagerNameLibrary.GetRandomNames(IsMale);
+        Stats = new VillagerStats(RNG.GetInstance());
     }
 
     public override string ToString()
     {
-        return $"{FirstName} {LastName} ({Age} years)";
+        return $"{FirstName} {LastName} ({Age} years) - Health: {Stats.Health.CurrentHealth}/{Stats.Health.MaxHealth}, Efficiency: {Stats.WorkEfficiency.Efficiency:P2}";
     }
 }

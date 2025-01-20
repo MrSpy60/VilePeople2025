@@ -20,5 +20,7 @@ sealed public class RNG
 
     public int Next(int max) => _random.Next(max);
     public int Next(int min, int max) => _random.Next(min, max);
-
+    
+    public double NextDouble() => _random.NextDouble();
+    public double NextDouble(double min, double max) => min + (_random.NextDouble() * (max - min));
 }
