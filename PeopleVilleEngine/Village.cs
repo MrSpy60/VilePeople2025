@@ -12,6 +12,7 @@ public class Village
     private TimeKeeper _timeKeeper;
     public List<BaseVillager> Villagers { get; } = new();
     public List<ILocation> Locations { get; } = new();
+    private List<IVillagerCreator> villageCreators;
     public VillagerNames VillagerNameLibrary { get; } = VillagerNames.GetInstance();
     public Village()
     {
@@ -24,15 +25,23 @@ public class Village
     private void CreateVillage()
     {
         var villagers = _random.Next(10, 24);
+        CreateVillagers(villagers);
+    }
+
+    public void CreateVillagers(int number)
+    {
         Console.ForegroundColor = ConsoleColor.Red;
 
-        var villageCreators = LoadVillagerCreatorFactories();
+        if (villageCreators == null)
+        {
+            villageCreators = LoadVillagerCreatorFactories();
+        }
         Console.ResetColor();
         Console.WriteLine();
 
         int villageCreatorindex = 0;
 
-        for (int i = 0; i < villagers; i++)
+        for (int i = 0; i < number; i++)
         {
             var created = false;
             do
@@ -44,7 +53,6 @@ public class Village
 
         Console.ResetColor();
     }
-
     private List<IVillagerCreator> LoadVillagerCreatorFactories()
     {
         var villageCreators = new List<IVillagerCreator>();
@@ -85,5 +93,10 @@ public class Village
     public void NextDay()
     {
         _timeKeeper.PassTime();
+    }
+
+    public int GetDay()
+    {
+        return _timeKeeper.getDate();
     }
 }

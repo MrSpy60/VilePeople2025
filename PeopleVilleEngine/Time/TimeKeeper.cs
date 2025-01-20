@@ -18,6 +18,8 @@ namespace PeopleVilleEngine.Time
         public List<IEvent> preEvent = new List<IEvent>();
         public List<IEvent> postEvent = new List<IEvent>();
         private int _date = 1;
+        private int _daysInAYear = 112;
+        private int _year = 0;
         private TimeKeeper(Village village)
         {
             Console.WriteLine("Creating Time Keeper");
@@ -34,9 +36,19 @@ namespace PeopleVilleEngine.Time
             }
         }
 
+        public int getDate()
+        {
+            return _date;
+        }
+
+        public string DateToString()
+        {
+            return _date.ToString();
+        }
+
         public void PassTime()
         {
-            Console.WriteLine($"Starting Day {_date}");
+            Console.WriteLine($"Starting Day {_date} Year {_year}");
             //Call event manager
             eventManager.TriggerEventManager(_village, preEvent, postEvent);
             //Pre-events
@@ -69,6 +81,11 @@ namespace PeopleVilleEngine.Time
             postEvent = [];
 
             _date++;
+            if (_date > _daysInAYear)
+            {
+                _year++;
+                _date -= _daysInAYear;
+            }
         }
     }
 }
