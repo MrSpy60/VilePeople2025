@@ -9,7 +9,6 @@
 
     <Grid>
         <Canvas Name="VillageCanvas" Background="ForestGreen" />
-        <TextBlock Text="{Binding VillagerCount, StringFormat='Villager Count: {0}', UpdateSourceTrigger=PropertyChanged}" FontSize="20" Foreground="Black" Canvas.Left="10" Canvas.Top="10" />
     </Grid>
     
 </Window>
