@@ -18,7 +18,7 @@ namespace PeopleVilleEngine.Status
             Owner.statuses.Add(this);
         }
 
-        public string Name => throw new NotImplementedException();
+        public string Name => "SortePer";
 
         public void effecttrigger(Village village)
         {
@@ -31,7 +31,7 @@ namespace PeopleVilleEngine.Status
                 newOwner.statuses.Add(this);
                 Owner.statuses.Remove(this);
                 Owner = newOwner;
-                Console.WriteLine($"{Owner.ToString()} is the new owner of SortePer");
+                Console.WriteLine($"{Owner.ToString()} is the new owner of {Name}");
                 traded = village.GetDay();
             }
         }
