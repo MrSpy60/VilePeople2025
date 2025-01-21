@@ -115,10 +115,7 @@ public class Village
         if (currentProject != null)
         {
             Console.WriteLine($"Working on {currentProject.ProjectType.Name}");
-            if (currentProject.IsComplete())
-            {
-                Console.WriteLine($"Project {currentProject.ProjectType.Name} is complete.");
-            }
+            Console.WriteLine($"Progress: {currentProject.CurrentProgress}/{currentProject.ProjectType.BuildCost}");
         }
     }
 }
