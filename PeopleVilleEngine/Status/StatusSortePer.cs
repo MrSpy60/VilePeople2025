@@ -16,6 +16,9 @@ namespace PeopleVilleEngine.Status
             Owner = village.Villagers[index];
             Owner.statuses.Add(this);
         }
+
+        public string Name => throw new NotImplementedException();
+
         public void effecttrigger(Village village)
         {
             int ownerIndex = village.Villagers.IndexOf(Owner);

@@ -28,5 +28,7 @@ public interface IWorkplace : ILocation
     public int MaxWorkers { get; }
     public int WorkCost { get; }
 
+
+
 }
 
