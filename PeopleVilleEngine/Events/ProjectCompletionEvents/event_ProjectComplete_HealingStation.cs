@@ -8,7 +8,7 @@ using PeopleVilleEngine.Villagers.VillagerStats;
 
 namespace PeopleVilleEngine.Events.ProjectCompletionEvents
 {
-    public class event_ProjectComplete_HealingStation
+    public class event_ProjectComplete_HealingStation : IEvent
     {
         public EventType Type => EventType.Active;
 

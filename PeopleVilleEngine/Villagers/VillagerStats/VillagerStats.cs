@@ -2,7 +2,7 @@
 {
     public class VillagerStats
     {
-        private int MaxHealth = 100;
+        public int MaxHealth = 100;
         public int CurrentHealth { get; private set; }
 
         public double Efficiency = 1;
