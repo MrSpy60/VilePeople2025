@@ -5,24 +5,24 @@ Console.WriteLine("PeopleVille");
 var village = new Village();
 Console.WriteLine(village.ToString());
 
-bool isPaused = false;
 
 while (village.Villagers.Count > 0)
 {
     if (Console.KeyAvailable)
     {
-        var key = Console.ReadKey(intercept: true).Key;
+        var key = Console.ReadKey(true).Key;
         if (key == ConsoleKey.Spacebar)
         {
-            isPaused = !isPaused;
-            Console.WriteLine(isPaused ? "Game Paused" : "Game Resumed");
+            Console.WriteLine("Game Paused");
+            PrintStatus(village);
+            Console.ReadKey(true);
+            Console.WriteLine("Game Resumed");
         }
     }
 
-    if (!isPaused)
-    {
-        village.NextDay();
-    }
+
+    village.NextDay();
+
 
     Thread.Sleep(100);
 }
