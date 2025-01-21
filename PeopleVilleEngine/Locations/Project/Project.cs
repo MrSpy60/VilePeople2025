@@ -53,7 +53,7 @@ namespace PeopleVilleEngine.Locations.Project
         public double BuildCost { get; set; }
         public double CurrentProgress { get; set; }
 
-        // Property to check if the project is complete
+        
         public bool IsComplete => CurrentProgress >= BuildCost;
 
         public SampleProject(double buildCost)
