@@ -9,6 +9,7 @@ namespace PeopleVilleEngine.Status
     internal class StatusSortePer : IStatus
     {
         RNG _rng = RNG.GetInstance();
+        public int traded = 0;
         private BaseVillager Owner;
         public StatusSortePer(Village village)
         {
@@ -16,16 +17,23 @@ namespace PeopleVilleEngine.Status
             Owner = village.Villagers[index];
             Owner.statuses.Add(this);
         }
+
+        public string Name => "SortePer";
+
         public void effecttrigger(Village village)
         {
-            int ownerIndex = village.Villagers.IndexOf(Owner);
-            int index = _rng.Next(village.Villagers.Count()-2);
-            if (index >= ownerIndex) index++;
-            BaseVillager newOwner = (BaseVillager)village.Villagers[index];
-            newOwner.statuses.Add(this);
-            Owner.statuses.Remove(this);
-            Owner = newOwner;
-            Console.WriteLine($"{Owner.ToString()} is the new owner of SortePer");
+            if (traded != village.GetDay()) // only trade SortePer once a day
+            {
+                int ownerIndex = village.Villagers.IndexOf(Owner);
+                int index = _rng.Next(village.Villagers.Count()-2);
+                if (index >= ownerIndex) index++;
+                BaseVillager newOwner = (BaseVillager)village.Villagers[index];
+                newOwner.statuses.Add(this);
+                Owner.statuses.Remove(this);
+                Owner = newOwner;
+                Console.WriteLine($"{Owner.ToString()} is the new owner of {Name}");
+                traded = village.GetDay();
+            }
         }
     }
 }

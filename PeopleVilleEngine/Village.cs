@@ -20,7 +20,7 @@ public class Village
         _timeKeeper = TimeKeeper.GetInstance(this);
         Console.WriteLine("Creating villager");
         CreateVillage();
-        //new StatusSortePer(this);
+        new StatusSortePer(this);
     }
 
 
