@@ -8,11 +8,6 @@ Console.WriteLine(village.ToString());
 
 while (village.Villagers.Count > 0)
 {
-    if (village.GetDay() % 7 == 0)
-    {
-        PrintStatus(village);
-        Console.ReadKey();
-    }
     village.NextDay();
     Thread.Sleep(100);
 }
