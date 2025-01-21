@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using PeopleVilleEngine.Events;
 using PeopleVilleEngine.Events.EventManagers;
 using PeopleVilleEngine.Locations;
+using PeopleVilleEngine.Status;
 
 namespace PeopleVilleEngine.Time
 {
@@ -63,16 +64,16 @@ namespace PeopleVilleEngine.Time
             {
                 // #TODO: loop status.trigger()
             }
-                //status Villagers
-            foreach (BaseVillager villager in _village.Villagers)
+            //status Villagers
+            Queue<BaseVillager> villagers = new Queue<BaseVillager>(_village.Villagers);
+            while (villagers.Count() > 0)
             {
-                if (villager == null)
+                BaseVillager v = villagers.Dequeue();
+                Queue<IStatus> statuses = new(v.statuses);
+                while (statuses.Count() > 0)
                 {
-                    continue;
-                }
-                if (villager.statuses.Count() != 0)
-                {
-                    villager.statuses.ForEach(status => { status.effecttrigger(_village); });
+                    IStatus stat = statuses.Dequeue();
+                    stat.effecttrigger(_village);
                 }
             }
             // WORK WORK
