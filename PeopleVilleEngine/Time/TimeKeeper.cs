@@ -24,7 +24,6 @@ namespace PeopleVilleEngine.Time
         private int _year = 0;
 
         private Queue<Project> _projectQueue  = new Queue<Project>();
-        private Project _currentProject;
 
 
         private TimeKeeper(Village village)
@@ -38,7 +37,7 @@ namespace PeopleVilleEngine.Time
             _projectQueue.Enqueue(new Project(new HealingStation()));
             
             // sets the first project
-            _currentProject = _projectQueue.Dequeue();
+            _village._currentProject = _projectQueue.Dequeue();
         }
 
         public static TimeKeeper GetInstance(Village village)
@@ -53,11 +52,6 @@ namespace PeopleVilleEngine.Time
         public int getDate()
         {
             return _date;
-        }
-
-        public Project GetCurrentProject()
-        {
-            return _currentProject;
         }
 
 
@@ -101,15 +95,15 @@ namespace PeopleVilleEngine.Time
             double additionalWork = aliveVillagers * 1.0; // each villager contributes 1 unit of work per day
 
             // add work to the current project
-            _currentProject.Work(additionalWork);
+            _village._currentProject.Work(additionalWork);
 
             // check if the current project is complete
-            if (_currentProject.IsComplete())
+            if (_village._currentProject.IsComplete())
             {
                 // if project is complete, remove + get the next from queue
                 if (_projectQueue.Count > 0)
                 {
-                    _currentProject = _projectQueue.Dequeue(); // get the next project
+                    _village._currentProject = _projectQueue.Dequeue(); // get the next project
                 }
 
             }

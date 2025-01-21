@@ -17,7 +17,7 @@ namespace PeopleVilleEngine.Events
             RNG rng = RNG.GetInstance();
             int whoDead = rng.Next(0, village.Villagers.Count() - 1);
             BaseVillager deadManWalking = village.Villagers[whoDead];
-            Console.WriteLine($"{deadManWalking.ToString()} died");
+            Console.WriteLine($"{deadManWalking.NameToString()} died");
             ILocation? home = deadManWalking.Home;
             if(home != null)
             {

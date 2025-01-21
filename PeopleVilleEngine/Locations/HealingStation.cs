@@ -9,7 +9,7 @@ public class HealingStation : IWorkplace
         MaxWorkers = random.Next(1, 3);
     }
     private readonly List<BaseVillager> _villagers = new();
-    public string Name => $"Healing Station, with {Workers} workers.";
+    public string Name => $"Healing Station";
     public int BuildCost => 50;
     public int WorkCost => 50;
     public IEvent WorkEvent_Complete => new eventDeath(); // Add health restoration event here.
@@ -19,6 +19,6 @@ public class HealingStation : IWorkplace
         return _villagers;
     }
 
-    public int Workers => _villagers.Count;
+    public int Workers => _villagers.Count();
     public int MaxWorkers { get; set; }
 }

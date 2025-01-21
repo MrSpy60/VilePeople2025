@@ -6,9 +6,11 @@ using System.Linq;
 using PeopleVilleEngine.Events;
 using PeopleVilleEngine.Time;
 using PeopleVilleEngine.Status;
+using PeopleVilleEngine.Locations.Project;
 
 public class Village
 {
+    public Project _currentProject;
     private readonly RNG _random = RNG.GetInstance();
     private TimeKeeper _timeKeeper;
     public List<BaseVillager> Villagers { get; } = new();
@@ -91,6 +93,11 @@ public class Village
         return $"Village have {Villagers.Count} villagers, where {Villagers.Count(v => v.HasHome() == false)} are homeless.";
     }
 
+    public Project GetCurrentProject()
+    {
+        return _currentProject;
+    }
+
     public void NextDay()
     {
         _timeKeeper.PassTime();
@@ -104,10 +111,10 @@ public class Village
 
     private void LogProjectUpdate()
     {
-        var currentProject = _timeKeeper.GetCurrentProject();
+        var currentProject = GetCurrentProject();
         if (currentProject != null)
         {
-            Console.WriteLine($"Day {GetDay()}: Working on {currentProject.ProjectType.Name}");
+            Console.WriteLine($"Working on {currentProject.ProjectType.Name}");
             if (currentProject.IsComplete())
             {
                 Console.WriteLine($"Project {currentProject.ProjectType.Name} is complete.");
