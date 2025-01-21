@@ -26,6 +26,6 @@ public abstract class BaseVillager
 
     public override string ToString()
     {
-        return $"{FirstName} {LastName} ({Age} years) - Health: {Stats.Health.CurrentHealth}/{Stats.Health.MaxHealth}, Efficiency: {Stats.WorkEfficiency.Value:P2}";
+        return $"{FirstName} {LastName} ({Age} years) - Health: {Stats.CurrentHealth}/{Stats.MaxHealth}, Efficiency: {Stats.Efficiency:P2}";
     }
 }
