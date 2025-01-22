@@ -158,6 +158,7 @@ namespace PeopleVilleEngine.Time
 
             if (_village._currentProject.IsComplete())
             {
+                _village.UpdateEvent();
                 int workId = _village._currentProject.WorkId;
                 _village.UpdateEvent($"{_village._currentProject.Name} has been completed");
                 // WorkId to track completion
