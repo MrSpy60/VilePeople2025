@@ -166,14 +166,6 @@ namespace PeopleVilleEngine.Time
                     _village._currentProject = _projectQueue.Dequeue();
                 }
             }
-
-            // irrelevant
-            /*
-            foreach (var projectCompletion in _completionCounters)
-            {
-                Console.WriteLine($"Project with WorkId: {projectCompletion.Key} has been completed {projectCompletion.Value} times.");
-            }
-            */
         }
 
         public bool RestartQueue()
