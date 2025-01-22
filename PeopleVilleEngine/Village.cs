@@ -11,7 +11,7 @@ public class Village
 {
     private readonly RNG _random = RNG.GetInstance();
     private TimeKeeper _timeKeeper;
-    private Logger _logger = Logger.GetInstance();
+    private Logger _logger;
     public List<BaseVillager> Villagers { get; } = new();
     public List<ILocation> Locations { get; } = new();
     private List<IVillagerCreator> villageCreators;
@@ -19,7 +19,10 @@ public class Village
     public Village()
     {
         _timeKeeper = TimeKeeper.GetInstance(this);
-        _logger.SetUpEventHandler(EventDayChanged, EventHappening);
+        _logger = Logger.GetInstance();
+        //_logger.SetUpEventHandler(EventDayChanged, EventHappening);
+        EventDayChanged += _logger.Village_Day;
+        EventHappening += _logger.Village_Happening;
         Console.WriteLine("Creating villager");
         CreateVillage();
         new StatusSortePer(this);
@@ -110,10 +113,11 @@ public class Village
         var currentProject = _timeKeeper.GetCurrentProject();
         if (currentProject != null)
         {
-            Console.WriteLine($"Day {GetDay()}: Working on {currentProject.ProjectType.Name}");
+            //Console.WriteLine($"Day {GetDay()}: Working on {currentProject.ProjectType.Name}");
             if (currentProject.IsComplete())
             {
-                Console.WriteLine($"Project {currentProject.ProjectType.Name} is complete.");
+                //Console.WriteLine($"Project {currentProject.ProjectType.Name} is complete.");
+                UpdateEvent($"Project {currentProject.ProjectType.Name} is complete.");
             }
         }
     }

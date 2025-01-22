@@ -69,7 +69,6 @@ namespace PeopleVilleEngine.Time
         public void PassTime()
         {
             _village.UpdateDate(_date);
-            _village.UpdateEvent("TEST");
             //Console.WriteLine($"Starting {DateToString()}");
             // Call event manager
             eventManager.TriggerEventManager(_village, preEvent, postEvent);
@@ -102,7 +101,7 @@ namespace PeopleVilleEngine.Time
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Exception: {ex.ToString()}");
+                _village.UpdateEvent($"Exception: {ex.ToString()}");
             }
 
            
