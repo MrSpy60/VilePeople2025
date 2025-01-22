@@ -49,6 +49,7 @@ namespace PeopleVilleEngine.Locations.Project
             return CurrentProgress >= ProjectType.BuildCost;
         }
         public int WorkId => ProjectType.WorkId;
+        public string Name => ProjectType.Name;
     }
 
     public class SampleProject : IProjects
