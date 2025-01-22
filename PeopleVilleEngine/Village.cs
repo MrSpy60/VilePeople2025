@@ -130,23 +130,23 @@ public class Village
     
     public event EventHandler<int> EventDayChanged;
 
-    protected virtual void UpdateDate(int e)
+    public virtual void UpdateDate(int e)
     {
         EventHandler<int> handler = EventDayChanged;
         if (handler != null)
         {
-            handler(handler, e);
+            handler(this, e);
         }
     }
 
-    public event EventHandler<int> EventHappening;
+    public event EventHandler<string> EventHappening;
 
-    protected virtual void UpdateEvent(int e)
+    public virtual void UpdateEvent(string e)
     {
-        EventHandler<int> handler = EventDayChanged;
+        EventHandler<string> handler = EventHappening;
         if (handler != null)
         {
-            handler(handler, e);
+            handler(this, e);
         }
     }
 }
