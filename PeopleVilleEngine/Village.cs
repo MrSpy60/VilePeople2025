@@ -114,4 +114,26 @@ public class Village
             }
         }
     }
+
+    public event EventHandler<int> EventDayChanged;
+
+    protected virtual void UpdateDate(int e)
+    {
+        EventHandler<int> handler = EventDayChanged;
+        if (handler != null)
+        {
+            handler(handler, e);
+        }
+    }
+
+    public event EventHandler<int> EventHappening;
+
+    protected virtual void UpdateEvent(int e)
+    {
+        EventHandler<int> handler = EventDayChanged;
+        if (handler != null)
+        {
+            handler(handler, e);
+        }
+    }
 }

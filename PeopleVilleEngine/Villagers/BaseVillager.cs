@@ -24,6 +24,11 @@ public abstract class BaseVillager
         statuses = [];
     }
 
+    public double DoWork()
+    {
+        return Stats.Efficiency;
+    }
+
     public override string ToString()
     {
         return $"{FirstName} {LastName} ({Age} years) - Health: {Stats.CurrentHealth}/{Stats.MaxHealth}, Efficiency: {Stats.Efficiency:P2}";
