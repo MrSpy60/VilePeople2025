@@ -32,7 +32,8 @@ public abstract class BaseVillager
 
     public string HealthToString()
     {
-        return $"Health: {Stats.Health.CurrentHealth}/{Stats.Health.MaxHealth}";
+        return $"Health: {Stats.CurrentHealth}/{Stats.MaxHealth}";
+    }
       
     public virtual double DoWork()
     {

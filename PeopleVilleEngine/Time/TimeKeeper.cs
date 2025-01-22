@@ -35,8 +35,8 @@ namespace PeopleVilleEngine.Time
             _village = village;
 
             // initialise Projects
-            AddProjectToQueue(new FoodStation());
-            AddProjectToQueue(new HealingStation()); ;
+            AddProjectToQueue((IWorkplace)new FoodStation());
+            AddProjectToQueue((IWorkplace)new HealingStation()); ;
 
             // sets the first project
             _village._currentProject = _projectQueue.Dequeue();
