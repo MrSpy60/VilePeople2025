@@ -98,6 +98,7 @@ namespace PeopleVilleEngine.Time
             while (villagers.Count() > 0)
             {
                 BaseVillager v = villagers.Dequeue();
+                v.Stats.Efficiency = 1;
                 Queue<IStatus> statuses = new(v.statuses);
                 while (statuses.Count() > 0)
                 {

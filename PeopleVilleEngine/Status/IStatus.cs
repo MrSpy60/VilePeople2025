@@ -31,11 +31,11 @@ namespace PeopleVilleEngine.Status
         public string Name => "Hammer";
         public int ToolID { get; } = 1;
         public required BaseVillager Owner { get; set; }
-        public double ValueBuff => 25.0;
+        public double ValueBuff => .25;
 
         public void effecttrigger(Village village)
         {
-            throw new NotImplementedException();
+            Owner.Stats.Efficiency += ValueBuff;
         }
 
     }
@@ -45,11 +45,11 @@ namespace PeopleVilleEngine.Status
         public string Name => "Axe";
         public int ToolID { get; } = 2;
         public required BaseVillager Owner { get; set; }
-        public double ValueBuff => 50.0;
+        public double ValueBuff => .5;
 
         public void effecttrigger(Village village)
         {
-            throw new NotImplementedException();
+            Owner.Stats.Efficiency += ValueBuff;
         }
 
     }
@@ -59,11 +59,11 @@ namespace PeopleVilleEngine.Status
         public string Name => "Golden Spoon";
         public int ToolID { get; } = 3;
         public required BaseVillager Owner { get; set; }
-        public double ValueBuff => 75.0;
+        public double ValueBuff => .75;
 
         public void effecttrigger(Village village)
         {
-            throw new NotImplementedException();
+            Owner.Stats.Efficiency += ValueBuff;
         }
         
     }
