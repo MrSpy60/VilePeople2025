@@ -127,12 +127,6 @@ classDiagram
         +void effecttrigger(Village village)
     }
 
-    class BaseProject {
-        interface IProjects {
-            +bool IsComplete
-        }
-    }
-
     class FoodStation {
         +FoodStation()
     }
