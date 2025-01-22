@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PeopleVilleEngine.Locations
 {
-    public abstract class BaseWorkplace
+    public abstract class BaseWorkplace : ILocation
     {
         private readonly List<BaseVillager> _workers = new();
         public string Name;
@@ -17,6 +17,10 @@ namespace PeopleVilleEngine.Locations
         public IEvent WorkEvent_Complete;
         public int Workers => _workers.Count();
         public int MaxWorkers { get; set; }
+
+        string ILocation.Name => this.Name;
+
+        int ILocation.BuildCost => this.BuildCost;
 
         public BaseWorkplace()
         {

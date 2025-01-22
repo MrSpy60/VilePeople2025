@@ -7,8 +7,9 @@ using PeopleVilleEngine.Status;
 
 namespace PeopleVilleEngine.Events.ProjectCompletionEvents
 {
-    public class event_ProjectComplete_FoodStation
+    public class event_ProjectComplete_FoodStation : IEvent
     {
+
         public EventType Type => EventType.Active;
 
         public void triggerEvent(Village village)
