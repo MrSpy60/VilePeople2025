@@ -23,7 +23,6 @@ public class SlackerVillageCreator : IVillagerCreator
         var adult = new SlackerVillager(village, random.Next(20, 65));
         //Add to village
         village.Villagers.Add(adult);
-        Console.WriteLine("\n\nSlacker!");
         return true;
     }
 }

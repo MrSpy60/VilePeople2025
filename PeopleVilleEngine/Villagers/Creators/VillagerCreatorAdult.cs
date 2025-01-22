@@ -1,4 +1,6 @@
 ﻿using PeopleVilleEngine.Locations;
+using PeopleVilleEngine.Status;
+using System.Reflection;
 namespace PeopleVilleEngine.Villagers.Creators;
 public class VillagerCreatorAdult : IVillagerCreator
 {
@@ -8,6 +10,7 @@ public class VillagerCreatorAdult : IVillagerCreator
         var adult = new AdultVillager(village, random.Next(18, 40));
         //Find house
         var home = FindHome(village);
+        ITool birthdayGift = FindTool();
 
         if (home.Villagers().Count(v => v.GetType() == typeof(AdultVillager)) >= 1)
         {
@@ -19,7 +22,7 @@ public class VillagerCreatorAdult : IVillagerCreator
 
         home.Villagers().Add(adult);
         adult.Home = home;
-
+        adult.statuses.Add(birthdayGift);
         //Add to village
         village.Villagers.Add(adult);
         return true;
@@ -41,5 +44,26 @@ public class VillagerCreatorAdult : IVillagerCreator
         village.Locations.Add(house);
         return house;
 
+    }
+
+    private ITool FindTool()
+    {
+        var random = RNG.GetInstance();
+        var assembly = Assembly.GetExecutingAssembly();
+        var toolType = typeof(ITool);
+        var potentialTools = assembly.GetTypes().Where(type => toolType.IsAssignableFrom(type) && type != toolType);
+        int birthdayGiftID = random.Next(1, potentialTools.Count());
+        foreach ( var potentialTool in potentialTools)
+        {
+            var instance = Activator.CreateInstance(potentialTool) as ITool;
+            if (instance != null && instance.ToolID == birthdayGiftID)
+            {
+                ITool birthdayGift = instance;
+                Console.WriteLine($"Generated a {instance.Name}");
+                return birthdayGift;
+
+            }
+        }
+        return null;
     }
 }
