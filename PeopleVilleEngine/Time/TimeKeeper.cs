@@ -140,11 +140,18 @@ namespace PeopleVilleEngine.Time
                 throw new InvalidOperationException("Village or current project or project queue is not initialised.");
             }
 
-            int aliveVillagers = _village.Villagers.Count(v => v != null);
-            const double WorkPerVillager = 1.0;
-            double additionalWork = aliveVillagers * WorkPerVillager;
+            double totalWork = 0.0;
 
-            _village._currentProject.Work(additionalWork); // add work to current project
+            // Calculate total work based on each villager's efficiency
+            foreach (var villager in _village.Villagers)
+            {
+                if (villager != null)
+                {
+                    totalWork += villager.DoWork();
+                }
+            }
+
+            _village._currentProject.Work(totalWork); // Add total work to current project
 
             if (_village._currentProject.IsComplete())
             {
@@ -157,7 +164,7 @@ namespace PeopleVilleEngine.Time
                 }
                 _completionCounters[workId.ToString()]++;
 
-                // dq next project or restart the queue
+                // Dequeue next project or restart the queue
                 if (_projectQueue.Count > 0)
                 {
                     _village._currentProject = _projectQueue.Dequeue();
