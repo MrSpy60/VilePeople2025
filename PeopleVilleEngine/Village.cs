@@ -114,8 +114,11 @@ public class Village
         var currentProject = GetCurrentProject();
         if (currentProject != null)
         {
+            
             Console.WriteLine($"Working on {currentProject.ProjectType.Name}");
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"Progress: {currentProject.CurrentProgress}/{currentProject.ProjectType.BuildCost}");
+            Console.ResetColor();
         }
     }
 }

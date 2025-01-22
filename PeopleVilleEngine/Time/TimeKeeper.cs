@@ -23,7 +23,7 @@ namespace PeopleVilleEngine.Time
         private int _daysInAYear = 112;
         private int _year = 0;
 
-        private readonly Queue<Project> _projectQueue  = new Queue<Project>();
+        private readonly Queue<Project> _projectQueue = new Queue<Project>();
         private List<Project> _originalProjects = new List<Project>();
         public Dictionary<string, int> _completionCounters = new Dictionary<string, int>();
 
@@ -37,7 +37,7 @@ namespace PeopleVilleEngine.Time
             // initialise Projects
             AddProjectToQueue(new FoodStation());
             AddProjectToQueue(new HealingStation()); ;
-            
+
             // sets the first project
             _village._currentProject = _projectQueue.Dequeue();
         }
@@ -130,10 +130,17 @@ namespace PeopleVilleEngine.Time
 
 
         // PROJECT
+        // PROJECT
         public void ProcessProject()
         {
+            if (_village == null || _village._currentProject == null || _projectQueue == null)
+            {
+                throw new InvalidOperationException("Village or current project or project queue is not initialised.");
+            }
+
             int aliveVillagers = _village.Villagers.Count(v => v != null);
-            double additionalWork = aliveVillagers * 1.0;
+            const double WorkPerVillager = 1.0;
+            double additionalWork = aliveVillagers * WorkPerVillager;
 
             _village._currentProject.Work(additionalWork); // add work to current project
 
@@ -141,7 +148,7 @@ namespace PeopleVilleEngine.Time
             {
                 int workId = _village._currentProject.WorkId;
 
-                // Use WorkId to track completion
+                // WorkId to track completion
                 if (!_completionCounters.ContainsKey(workId.ToString()))
                 {
                     _completionCounters[workId.ToString()] = 0;
@@ -159,6 +166,8 @@ namespace PeopleVilleEngine.Time
                     _village._currentProject = _projectQueue.Dequeue();
                 }
             }
+
+            // irrelevant
             /*
             foreach (var projectCompletion in _completionCounters)
             {
@@ -175,5 +184,6 @@ namespace PeopleVilleEngine.Time
             }
             return true;
         }
+
     }
 }
