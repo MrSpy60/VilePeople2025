@@ -51,7 +51,7 @@ namespace PeopleVilleEngine.Time
             }
         }
 
-        private void AddProjectToQueue(ILocation station)
+        private void AddProjectToQueue(ILocation station) // IWorkplace
         {
             var project = new Project(station);
             _projectQueue.Enqueue(project);
