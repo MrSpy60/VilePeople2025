@@ -13,6 +13,7 @@ namespace PeopleVilleEngine.Locations
         public string Name;
         public int BuildCost;
         public int WorkCost;
+        public int WorkId;
         public double CurrentProgress = 0;
         public IEvent WorkEvent_Complete;
         public int Workers => _workers.Count();
@@ -24,7 +25,7 @@ namespace PeopleVilleEngine.Locations
 
         int IWorkplace.WorkCost => this.WorkCost;
 
-        public int WorkId => throw new NotImplementedException();
+        int IWorkplace.WorkId => this.WorkId;
 
         public BaseWorkplace()
         {

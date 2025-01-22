@@ -11,7 +11,7 @@ public class HealingStation : BaseWorkplace
         BuildCost = 50;
         WorkCost = 50;
         WorkEvent_Complete = (IEvent)new event_ProjectComplete_HealingStation();
-
+        WorkId = 1;
     }
 
 }

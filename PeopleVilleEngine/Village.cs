@@ -90,7 +90,7 @@ public class Village
 
     public override string ToString()
     {
-        return $"Village have {Villagers.Count} villagers, where {Villagers.Count(v => v.HasHome() == false)} are homeless.";
+        return $"Village has {Villagers.Count} villagers, where {Villagers.Count(v => v.HasHome() == false)} are homeless.";
     }
 
     public Project GetCurrentProject()

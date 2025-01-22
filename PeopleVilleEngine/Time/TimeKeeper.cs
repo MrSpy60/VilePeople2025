@@ -77,6 +77,7 @@ namespace PeopleVilleEngine.Time
 
         public void PassTime()
         {
+            Console.WriteLine($"\n");
             Console.WriteLine($"Starting {DateToString()}");
             // Call event manager
             eventManager.TriggerEventManager(_village, preEvent, postEvent);
