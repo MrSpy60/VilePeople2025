@@ -27,7 +27,8 @@ namespace PeopleVilleEngine.Time
                 {
                     Console.WriteLine(happenings.Dequeue());
                 }
-        }
+                Console.WriteLine("\n\n");
+            }
             day = e;
         }
 

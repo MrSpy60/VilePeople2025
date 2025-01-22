@@ -111,9 +111,7 @@ namespace PeopleVilleEngine.Time
             catch (Exception ex)
             {
                 _village.UpdateEvent($"Exception: {ex.ToString()}");
-            }
-
-           
+            }         
 
             ProcessProject();
 
