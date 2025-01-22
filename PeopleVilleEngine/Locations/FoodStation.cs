@@ -5,11 +5,22 @@ namespace PeopleVilleEngine.Locations;
 public class FoodStation : BaseWorkplace
 {
     public FoodStation() : base()
-    {
-        Name = "Food Station";
-        BuildCost = 50;
-        WorkCost = 50;
-        WorkEvent_Complete = (IEvent) new event_ProjectComplete_FoodStation();
-        
+    {    
+      private readonly List<BaseVillager> _villagers = new();
+      public string Name => $"Food Station";
+      public int BuildCost => 50;
+      public int WorkCost => 50;
+      public int WorkId {get;} => 2;
+
+      public List<BaseVillager> Villagers()
+      {
+          return _villagers;
+      }
+
+      public int Workers => _villagers.Count();
+      public int MaxWorkers { get; set; }
+
+          WorkEvent_Complete = (IEvent) new event_ProjectComplete_FoodStation();
+
     }
 }

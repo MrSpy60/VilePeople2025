@@ -24,6 +24,16 @@ public abstract class BaseVillager
         statuses = [];
     }
 
+
+    public string NameToString()
+    {
+        return $"{FirstName} {LastName} ({Age} years)";
+    }
+
+    public string HealthToString()
+    {
+        return $"Health: {Stats.Health.CurrentHealth}/{Stats.Health.MaxHealth}";
+      
     public virtual double DoWork()
     {
         return Stats.Efficiency;

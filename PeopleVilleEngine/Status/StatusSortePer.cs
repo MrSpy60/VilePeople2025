@@ -30,7 +30,7 @@ namespace PeopleVilleEngine.Status
                 newOwner.statuses.Add(this);
                 Owner.statuses.Remove(this);
                 Owner = newOwner;
-                Console.WriteLine($"{Owner.ToString()} is the new owner of {Name}");
+                Console.WriteLine($"{Owner.NameToString()} is the new owner of {Name}");
                 traded = village.GetDay();
             }
         }

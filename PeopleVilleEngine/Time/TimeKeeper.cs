@@ -23,8 +23,9 @@ namespace PeopleVilleEngine.Time
         private int _daysInAYear = 112;
         private int _year = 0;
 
-        private Queue<Project> _projectQueue  = new Queue<Project>();
-        private Project _currentProject;
+        private readonly Queue<Project> _projectQueue = new Queue<Project>();
+        private List<Project> _originalProjects = new List<Project>();
+        public Dictionary<string, int> _completionCounters = new Dictionary<string, int>();
 
 
         private TimeKeeper(Village village)
@@ -34,11 +35,11 @@ namespace PeopleVilleEngine.Time
             _village = village;
 
             // initialise Projects
-            _projectQueue.Enqueue(new Project(new FoodStation()));
-            _projectQueue.Enqueue(new Project(new HealingStation()));
-            
+            AddProjectToQueue(new FoodStation());
+            AddProjectToQueue(new HealingStation()); ;
+
             // sets the first project
-            _currentProject = _projectQueue.Dequeue();
+            _village._currentProject = _projectQueue.Dequeue();
         }
 
         public static TimeKeeper GetInstance(Village village)
@@ -50,14 +51,22 @@ namespace PeopleVilleEngine.Time
             }
         }
 
+        private void AddProjectToQueue(IWorkplace station) // IWorkplace
+        {
+            var project = new Project(station);
+            _projectQueue.Enqueue(project);
+            _originalProjects.Add(project);
+
+            string projectName = station.GetType().Name;
+            if (!_completionCounters.ContainsKey(projectName))
+            {
+                _completionCounters[projectName] = 0;
+            }
+        }
+
         public int getDate()
         {
             return _date;
-        }
-
-        public Project GetCurrentProject()
-        {
-            return _currentProject;
         }
 
 
@@ -96,23 +105,7 @@ namespace PeopleVilleEngine.Time
                 }
             }
 
-            // PROJECT: Work on the current project
-            int aliveVillagers = _village.Villagers.Count(v => v != null); // count alive villagers
-            double additionalWork = aliveVillagers * 1.0; // each villager contributes 1 unit of work per day
-
-            // add work to the current project
-            _currentProject.Work(additionalWork);
-
-            // check if the current project is complete
-            if (_currentProject.IsComplete())
-            {
-                // if project is complete, remove + get the next from queue
-                if (_projectQueue.Count > 0)
-                {
-                    _currentProject = _projectQueue.Dequeue(); // get the next project
-                }
-
-            }
+            ProcessProject();
 
 
             // Post-Events
@@ -132,5 +125,53 @@ namespace PeopleVilleEngine.Time
                 _date -= _daysInAYear;
             }
         }
+
+        // PROJECT
+        public void ProcessProject()
+        {
+            if (_village == null || _village._currentProject == null || _projectQueue == null)
+            {
+                throw new InvalidOperationException("Village or current project or project queue is not initialised.");
+            }
+
+            int aliveVillagers = _village.Villagers.Count(v => v != null);
+            const double WorkPerVillager = 1.0;
+            double additionalWork = aliveVillagers * WorkPerVillager;
+
+            _village._currentProject.Work(additionalWork); // add work to current project
+
+            if (_village._currentProject.IsComplete())
+            {
+                int workId = _village._currentProject.WorkId;
+
+                // WorkId to track completion
+                if (!_completionCounters.ContainsKey(workId.ToString()))
+                {
+                    _completionCounters[workId.ToString()] = 0;
+                }
+                _completionCounters[workId.ToString()]++;
+
+                // dq next project or restart the queue
+                if (_projectQueue.Count > 0)
+                {
+                    _village._currentProject = _projectQueue.Dequeue();
+                }
+                else
+                {
+                    RestartQueue();
+                    _village._currentProject = _projectQueue.Dequeue();
+                }
+            }
+        }
+
+        public bool RestartQueue()
+        {
+            foreach (var project in _originalProjects)
+            {
+                _projectQueue.Enqueue(new Project(project.ProjectType));
+            }
+            return true;
+        }
+
     }
 }

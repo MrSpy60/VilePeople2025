@@ -10,14 +10,14 @@ namespace PeopleVilleEngine.Locations.Project
 {
     public class Project
     {
-        public ILocation ProjectType { get; }
+        public IWorkplace ProjectType { get; private set; }
         public double CurrentProgress { get; private set; }
 
         private List<IProjects> Projects { get; } = new(); // stores different projects
 
-        public Project(ILocation projectType)
+        public Project(IWorkplace workplace)
         {
-            ProjectType = projectType;
+            ProjectType = workplace;
             CurrentProgress = 0;
         }
 
@@ -46,6 +46,7 @@ namespace PeopleVilleEngine.Locations.Project
         {
             return CurrentProgress >= ProjectType.BuildCost;
         }
+        public int WorkId => ProjectType.WorkId;
     }
 
     public class SampleProject : IProjects
