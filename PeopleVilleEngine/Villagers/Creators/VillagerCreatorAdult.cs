@@ -22,6 +22,7 @@ public class VillagerCreatorAdult : IVillagerCreator
 
         home.Villagers().Add(adult);
         adult.Home = home;
+        birthdayGift.Owner = adult;
         adult.statuses.Add(birthdayGift);
         //Add to village
         village.Villagers.Add(adult);
@@ -52,7 +53,7 @@ public class VillagerCreatorAdult : IVillagerCreator
         var assembly = Assembly.GetExecutingAssembly();
         var toolType = typeof(ITool);
         var potentialTools = assembly.GetTypes().Where(type => toolType.IsAssignableFrom(type) && type != toolType);
-        int birthdayGiftID = random.Next(1, potentialTools.Count());
+        int birthdayGiftID = random.Next(1, (potentialTools.Count() + 1));
         foreach ( var potentialTool in potentialTools)
         {
             var instance = Activator.CreateInstance(potentialTool) as ITool;
