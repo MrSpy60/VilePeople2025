@@ -18,6 +18,7 @@ namespace PeopleVilleEngine.Status
     {
         BaseVillager Owner { get; set; }
         double ValueBuff { get; }
+        int ToolID { get;} // Used to find a random Tool when generating new villagers in VillagerCreatorAdult.cs
     }
     public interface INegative : IStatus
     {
@@ -28,6 +29,7 @@ namespace PeopleVilleEngine.Status
     public class Tool25 : ITool
     {
         public string Name => "Hammer";
+        public int ToolID { get; } = 1;
         public required BaseVillager Owner { get; set; }
         public double ValueBuff => 25.0;
 
@@ -41,6 +43,7 @@ namespace PeopleVilleEngine.Status
     public class Tool50 : ITool
     {
         public string Name => "Axe";
+        public int ToolID { get; } = 2;
         public required BaseVillager Owner { get; set; }
         public double ValueBuff => 50.0;
 
@@ -54,6 +57,7 @@ namespace PeopleVilleEngine.Status
     public class Tool75 : ITool
     {
         public string Name => "Golden Spoon";
+        public int ToolID { get; } = 3;
         public required BaseVillager Owner { get; set; }
         public double ValueBuff => 75.0;
 

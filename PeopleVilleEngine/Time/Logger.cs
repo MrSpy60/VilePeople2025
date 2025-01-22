@@ -18,7 +18,7 @@ namespace PeopleVilleEngine.Time
             {
                 return;
             }
-            
+
             if (day != e && happenings.Count() >0)
             {
                 Console.WriteLine($"Day {e}");
@@ -26,7 +26,7 @@ namespace PeopleVilleEngine.Time
                 {
                     Console.WriteLine(happenings.Dequeue());
                 }
-            }
+        }
             day = e;
         }
 
@@ -45,12 +45,6 @@ namespace PeopleVilleEngine.Time
                 _Instance = new Logger();
             }
             return _Instance;
-        }
-
-        public void SetUpEventHandler(EventHandler<int> day,EventHandler<string> happening )
-        {
-            day += Village_Day;
-            happening += Village_Happening;
         }
     }
 }

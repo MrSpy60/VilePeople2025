@@ -1,25 +1,15 @@
 ﻿using PeopleVilleEngine.Events;
+using PeopleVilleEngine.Events.ProjectCompletionEvents;
 
 namespace PeopleVilleEngine.Locations;
-public class FoodStation : IWorkplace
+public class FoodStation : BaseWorkplace
 {
-    public FoodStation()
+    public FoodStation() : base()
     {
-        var random = RNG.GetInstance();
-        MaxWorkers = random.Next(1, 3);
+        Name = "Food Station";
+        BuildCost = 50;
+        WorkCost = 50;
+        WorkEvent_Complete = (IEvent)new event_ProjectComplete_FoodStation();
+        WorkId = 2;
     }
-    private readonly List<BaseVillager> _villagers = new();
-    public string Name => $"Food Station";
-    public int BuildCost => 50;
-    public int WorkCost => 50;
-    public IEvent WorkEvent_Complete => new eventDeath(); // Add hunger restoration event here
-    public int WorkId => 2;
-
-    public List<BaseVillager> Villagers()
-    {
-        return _villagers;
-    }
-
-    public int Workers => _villagers.Count();
-    public int MaxWorkers { get; set; }
 }
