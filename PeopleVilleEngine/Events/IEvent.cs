@@ -18,7 +18,6 @@ namespace PeopleVilleEngine.Events
         None = 0,
         Passive = 1,
         Active = 2,
-        Random = 3,
-        Timed = 4
+        Random = 3
     }
 }

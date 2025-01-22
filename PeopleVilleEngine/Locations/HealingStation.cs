@@ -1,11 +1,9 @@
 ﻿using PeopleVilleEngine.Events;
-using PeopleVilleEngine.Events.ProjectCompletionEvents;
-using System.Xml.Linq;
 
 namespace PeopleVilleEngine.Locations;
-public class HealingStation : BaseWorkplace
+public class HealingStation : IWorkplace
 {
-    public HealingStation() : base()
+    public HealingStation()
     {
         var random = RNG.GetInstance();
         MaxWorkers = random.Next(1, 3);
@@ -15,15 +13,13 @@ public class HealingStation : BaseWorkplace
     public int BuildCost => 50;
     public int WorkCost => 50;
     public IEvent WorkEvent_Complete => new eventDeath(); // Add health restoration event here.
-    public int WorkId = 1;
-        Name = "Healing Station";
-        BuildCost = 50;
-        WorkCost = 50;
-        WorkEvent_Complete = (IEvent)new event_ProjectComplete_HealingStation();
+    public int WorkId { get; } = 1;
 
+    public List<BaseVillager> Villagers()
+    {
+        return _villagers;
     }
 
     public int Workers => _villagers.Count();
     public int MaxWorkers { get; set; }
-
 }
