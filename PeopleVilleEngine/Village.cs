@@ -13,6 +13,7 @@ public class Village
     public Project _currentProject;
     private readonly RNG _random = RNG.GetInstance();
     private TimeKeeper _timeKeeper;
+    private Logger _logger;
     public List<BaseVillager> Villagers { get; } = new();
     public List<ILocation> Locations { get; } = new();
     private List<IVillagerCreator> villageCreators;
@@ -20,6 +21,10 @@ public class Village
     public Village()
     {
         _timeKeeper = TimeKeeper.GetInstance(this);
+        _logger = Logger.GetInstance();
+        //_logger.SetUpEventHandler(EventDayChanged, EventHappening);
+        EventDayChanged += _logger.Village_Day;
+        EventHappening += _logger.Village_Happening;
         Console.WriteLine("Creating villager");
         CreateVillage();
         new StatusSortePer(this);
@@ -30,6 +35,7 @@ public class Village
     {
         var villagers = _random.Next(10, 24);
         CreateVillagers(villagers);
+
     }
 
     public void CreateVillagers(int number)
@@ -114,11 +120,33 @@ public class Village
         var currentProject = GetCurrentProject();
         if (currentProject != null)
         {
-            
+
             Console.WriteLine($"Working on {currentProject.ProjectType.Name}");
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"Progress: {currentProject.CurrentProgress}/{currentProject.ProjectType.BuildCost}");
             Console.ResetColor();
+        }
+    }
+    
+    public event EventHandler<int> EventDayChanged;
+
+    protected virtual void UpdateDate(int e)
+    {
+        EventHandler<int> handler = EventDayChanged;
+        if (handler != null)
+        {
+            handler(handler, e);
+        }
+    }
+
+    public event EventHandler<int> EventHappening;
+
+    protected virtual void UpdateEvent(int e)
+    {
+        EventHandler<int> handler = EventDayChanged;
+        if (handler != null)
+        {
+            handler(handler, e);
         }
     }
 }

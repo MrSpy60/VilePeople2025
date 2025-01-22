@@ -77,7 +77,8 @@ namespace PeopleVilleEngine.Time
 
         public void PassTime()
         {
-            Console.WriteLine($"Starting {DateToString()}");
+            _village.UpdateDate(_date);
+            //Console.WriteLine($"Starting {DateToString()}");
             // Call event manager
             eventManager.TriggerEventManager(_village, preEvent, postEvent);
             // Pre-events
@@ -93,17 +94,26 @@ namespace PeopleVilleEngine.Time
                 // #TODO: loop status.trigger()
             }
             //status Villagers
-            Queue<BaseVillager> villagers = new Queue<BaseVillager>(_village.Villagers);
-            while (villagers.Count() > 0)
+            try
             {
-                BaseVillager v = villagers.Dequeue();
-                Queue<IStatus> statuses = new(v.statuses);
-                while (statuses.Count() > 0)
+                Queue<BaseVillager> villagers = new Queue<BaseVillager>(_village.Villagers);
+                while (villagers.Count() > 0)
                 {
-                    IStatus stat = statuses.Dequeue();
-                    stat.effecttrigger(_village);
+                    BaseVillager v = villagers.Dequeue();
+                    Queue<IStatus> statuses = new(v.statuses);
+                    while (statuses.Count() > 0)
+                    {
+                        IStatus stat = statuses.Dequeue();
+                        stat.effecttrigger(_village);
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                _village.UpdateEvent($"Exception: {ex.ToString()}");
+            }
+
+           
 
             ProcessProject();
 
