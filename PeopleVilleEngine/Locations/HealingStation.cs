@@ -13,6 +13,7 @@ public class HealingStation : IWorkplace
     public int BuildCost => 50;
     public int WorkCost => 50;
     public IEvent WorkEvent_Complete => new eventDeath(); // Add health restoration event here.
+    public int WorkId { get; } = 1;
 
     public List<BaseVillager> Villagers()
     {

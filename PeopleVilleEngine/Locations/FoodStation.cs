@@ -13,6 +13,7 @@ public class FoodStation : IWorkplace
     public int BuildCost => 50;
     public int WorkCost => 50;
     public IEvent WorkEvent_Complete => new eventDeath(); // Add hunger restoration event here
+    public int WorkId => 2;
 
     public List<BaseVillager> Villagers()
     {

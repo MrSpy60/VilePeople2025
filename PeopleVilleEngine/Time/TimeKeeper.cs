@@ -51,7 +51,7 @@ namespace PeopleVilleEngine.Time
             }
         }
 
-        private void AddProjectToQueue(ILocation station) // IWorkplace
+        private void AddProjectToQueue(IWorkplace station) // IWorkplace
         {
             var project = new Project(station);
             _projectQueue.Enqueue(project);
@@ -135,18 +135,18 @@ namespace PeopleVilleEngine.Time
             int aliveVillagers = _village.Villagers.Count(v => v != null);
             double additionalWork = aliveVillagers * 1.0;
 
-            _village._currentProject.Work(additionalWork);// add work current project
+            _village._currentProject.Work(additionalWork); // add work to current project
 
             if (_village._currentProject.IsComplete())
             {
-                string projectName = _village._currentProject.GetType().Name;
+                int workId = _village._currentProject.WorkId;
 
-                if (!_completionCounters.ContainsKey(projectName))
+                // Use WorkId to track completion
+                if (!_completionCounters.ContainsKey(workId.ToString()))
                 {
-                    _completionCounters[projectName] = 0;
+                    _completionCounters[workId.ToString()] = 0;
                 }
-                _completionCounters[projectName]++;
-                // Console.WriteLine($"{projectName} completed {_completionCounters[projectName]} times.");
+                _completionCounters[workId.ToString()]++;
 
                 // dq next project or restart the queue
                 if (_projectQueue.Count > 0)
@@ -159,11 +159,14 @@ namespace PeopleVilleEngine.Time
                     _village._currentProject = _projectQueue.Dequeue();
                 }
             }
+            /*
             foreach (var projectCompletion in _completionCounters)
             {
-                Console.WriteLine($"Project: {projectCompletion.Key} has been completed {projectCompletion.Value} times.");
+                Console.WriteLine($"Project with WorkId: {projectCompletion.Key} has been completed {projectCompletion.Value} times.");
             }
+            */
         }
+
         public bool RestartQueue()
         {
             foreach (var project in _originalProjects)
