@@ -24,7 +24,7 @@ public abstract class BaseVillager
         statuses = [];
     }
 
-    public double DoWork()
+    public virtual double DoWork()
     {
         return Stats.Efficiency;
     }
