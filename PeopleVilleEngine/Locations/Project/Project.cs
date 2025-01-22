@@ -29,6 +29,8 @@ namespace PeopleVilleEngine.Locations.Project
             {
                 CurrentProgress = ProjectType.BuildCost; // ensures it doesn't exceed BuildCost
                 RemoveCompletedProject();
+                Console.WriteLine($"{ProjectType.Name} completed");
+
             }
         }
 
