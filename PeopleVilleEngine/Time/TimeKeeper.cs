@@ -126,10 +126,6 @@ namespace PeopleVilleEngine.Time
             }
         }
 
-
-
-
-        // PROJECT
         // PROJECT
         public void ProcessProject()
         {
