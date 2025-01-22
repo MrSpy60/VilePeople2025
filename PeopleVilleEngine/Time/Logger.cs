@@ -14,14 +14,15 @@ namespace PeopleVilleEngine.Time
 
         public void Village_Day(object? sender, int e)
         {
+            
             if (sender == null)
             {
                 return;
             }
-
+            Village village = (Village)sender;
             if (day != e && happenings.Count() >0)
             {
-                Console.WriteLine($"Day {e}");
+                Console.WriteLine(village.DateToString());
                 while (happenings.Count() > 0)
                 {
                     Console.WriteLine(happenings.Dequeue());

@@ -7,6 +7,7 @@ using PeopleVilleEngine.Events;
 using PeopleVilleEngine.Time;
 using PeopleVilleEngine.Status;
 using PeopleVilleEngine.Locations.Project;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 public class Village
 {
@@ -22,7 +23,6 @@ public class Village
     {
         _timeKeeper = TimeKeeper.GetInstance(this);
         _logger = Logger.GetInstance();
-        //_logger.SetUpEventHandler(EventDayChanged, EventHappening);
         EventDayChanged += _logger.Village_Day;
         EventHappening += _logger.Village_Happening;
         Console.WriteLine("Creating villager");
@@ -113,6 +113,10 @@ public class Village
     public int GetDay()
     {
         return _timeKeeper.getDate();
+    }
+    public string DateToString()
+    {
+        return _timeKeeper.DateToString();
     }
 
     private void LogProjectUpdate()
