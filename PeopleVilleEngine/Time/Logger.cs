@@ -6,20 +6,38 @@ using System.Threading.Tasks;
 
 namespace PeopleVilleEngine.Time
 {
-    internal class Logger
+    public class Logger
     {
         private static Logger? _Instance;
         private int day;
         Queue<string> happenings = new();
 
-        private void Village_Day(object? sender, int e)
+        public void Village_Day(object? sender, int e)
         {
-
+            
+            if (sender == null)
+            {
+                return;
+            }
+            Village village = (Village)sender;
+            if (day != e && happenings.Count() >0)
+            {
+                Console.WriteLine(village.DateToString());
+                while (happenings.Count() > 0)
+                {
+                    Console.WriteLine(happenings.Dequeue());
+                }
+                Console.WriteLine("\n\n");
+            }
+            day = e;
         }
 
-        private void Village_Happening(object? sender, int e)
+        public void Village_Happening(object? sender, string e)
         {
-
+            if (sender != null)
+            {
+                happenings.Enqueue(e);
+            }
         }
 
         public static Logger GetInstance()
@@ -29,11 +47,6 @@ namespace PeopleVilleEngine.Time
                 _Instance = new Logger();
             }
             return _Instance;
-        }
-
-        public void SetVillage(Village village)
-        {
-
         }
     }
 }
