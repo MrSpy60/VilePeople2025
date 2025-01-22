@@ -17,7 +17,6 @@ namespace PeopleVilleEngine.Status
             Owner = village.Villagers[index];
             Owner.statuses.Add(this);
         }
-
         public string Name => "SortePer";
 
         public void effecttrigger(Village village)

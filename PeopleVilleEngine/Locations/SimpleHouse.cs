@@ -15,7 +15,7 @@ public class SimpleHouse : IHouse
         return _villagers;
     }
 
-    public int Population => _villagers.Count;
+    public int Population => _villagers.Count();
     public int MaxPopulation { get; set; }
 
 }
