@@ -11,6 +11,7 @@ public class Village
 {
     private readonly RNG _random = RNG.GetInstance();
     private TimeKeeper _timeKeeper;
+    private Logger _logger = Logger.GetInstance();
     public List<BaseVillager> Villagers { get; } = new();
     public List<ILocation> Locations { get; } = new();
     private List<IVillagerCreator> villageCreators;
@@ -18,6 +19,7 @@ public class Village
     public Village()
     {
         _timeKeeper = TimeKeeper.GetInstance(this);
+        _logger.SetUpEventHandler(EventDayChanged, EventHappening);
         Console.WriteLine("Creating villager");
         CreateVillage();
         new StatusSortePer(this);
@@ -28,6 +30,7 @@ public class Village
     {
         var villagers = _random.Next(10, 24);
         CreateVillagers(villagers);
+
     }
 
     public void CreateVillagers(int number)
@@ -117,23 +120,23 @@ public class Village
 
     public event EventHandler<int> EventDayChanged;
 
-    protected virtual void UpdateDate(int e)
+    public virtual void UpdateDate(int e)
     {
         EventHandler<int> handler = EventDayChanged;
         if (handler != null)
         {
-            handler(handler, e);
+            handler(this, e);
         }
     }
 
-    public event EventHandler<int> EventHappening;
+    public event EventHandler<string> EventHappening;
 
-    protected virtual void UpdateEvent(int e)
+    public virtual void UpdateEvent(string e)
     {
-        EventHandler<int> handler = EventDayChanged;
+        EventHandler<string> handler = EventHappening;
         if (handler != null)
         {
-            handler(handler, e);
+            handler(this, e);
         }
     }
 }

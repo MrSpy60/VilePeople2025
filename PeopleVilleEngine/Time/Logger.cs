@@ -14,12 +14,29 @@ namespace PeopleVilleEngine.Time
 
         private void Village_Day(object? sender, int e)
         {
-
+            if (sender != null)
+            {
+                return;
+            }
+            Console.WriteLine(day);
+            Console.WriteLine(e);
+            if (day != e && happenings.Count() >0)
+            {
+                Console.WriteLine($"Day {e}");
+                while (happenings.Count() > 0)
+                {
+                    Console.WriteLine(happenings.Dequeue());
+                }
+            }
+            day = e;
         }
 
-        private void Village_Happening(object? sender, int e)
+        private void Village_Happening(object? sender, string e)
         {
-
+            if (sender != null)
+            {
+                happenings.Enqueue(e);
+            }
         }
 
         public static Logger GetInstance()
@@ -31,9 +48,10 @@ namespace PeopleVilleEngine.Time
             return _Instance;
         }
 
-        public void SetVillage(Village village)
+        public void SetUpEventHandler(EventHandler<int> day,EventHandler<string> happening )
         {
-
+            day += Village_Day;
+            happening += Village_Happening;
         }
     }
 }
